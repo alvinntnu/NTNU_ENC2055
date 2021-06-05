@@ -13,19 +13,29 @@
 
 <title>Data</title>
 
+<script src="site_libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<script src="site_libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="site_libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
 <script src="site_libs/viz-1.8.2/viz.js"></script>
 <link href="site_libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
-<script src="site_libs/grViz-binding-1.0.5/grViz.js"></script>
+<script src="site_libs/grViz-binding-1.0.6.1/grViz.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -38,12 +48,16 @@
   gtag('config', 'UA-155266163-1');
 </script>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -56,32 +70,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 
 
@@ -91,10 +80,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -111,40 +96,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 61px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 66px;
-  margin-top: -66px;
-}
-.section h2 {
-  padding-top: 66px;
-  margin-top: -66px;
-}
-.section h3 {
-  padding-top: 66px;
-  margin-top: -66px;
-}
-.section h4 {
-  padding-top: 66px;
-  margin-top: -66px;
-}
-.section h5 {
-  padding-top: 66px;
-  margin-top: -66px;
-}
-.section h6 {
-  padding-top: 66px;
-  margin-top: -66px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -172,7 +130,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -184,7 +142,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -195,10 +153,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -210,7 +181,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -288,28 +258,28 @@ $(document).ready(function () {
       <ul class="nav navbar-nav">
         <li>
   <a href="index.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
     Home
   </a>
 </li>
 <li>
   <a href="https://alvinntnu.github.io/NTNU_ENC2055_LECTURES/">
-    <span class="fa fa-book"></span>
+    <span class="fas fa-book"></span>
      
     Lectures
   </a>
 </li>
 <li>
   <a href="data.html">
-    <span class="fa fa-folder-open"></span>
+    <span class="fas fa-folder-open"></span>
      
     Demo Data
   </a>
 </li>
 <li>
   <a href="FAQ.html">
-    <span class="fa fa-question-circle"></span>
+    <span class="fas fa-question-circle"></span>
      
     FAQ
   </a>
@@ -318,31 +288,31 @@ $(document).ready(function () {
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://docs.google.com/document/d/10Qt3N4ZJ1wx2t81bu5ZwjukcGg4A7HO-IM2php1joGU/edit?usp=sharing">
-    <span class="fa fa-laptop-code"></span>
+    <span class="fas fa-laptop-code"></span>
      
   </a>
 </li>
 <li>
   <a href="whiteboard.html">
-    <span class="fa fa-chalkboard"></span>
+    <span class="fas fa-chalkboard"></span>
      
   </a>
 </li>
 <li>
   <a href="http://web.ntnu.edu.tw/~alvinchen">
-    <span class="fa fa-user-tie"></span>
+    <span class="fas fa-user-tie"></span>
      
   </a>
 </li>
 <li>
   <a href="contact.html">
-    <span class="fa fa-envelope"></span>
+    <span class="fas fa-envelope"></span>
      
   </a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    <span class="fa fa-external-link-alt"></span>
+    <span class="fas fa-external-link-alt"></span>
      
      
     <span class="caret"></span>
@@ -350,14 +320,14 @@ $(document).ready(function () {
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="http://www.eng.ntnu.edu.tw/">
-        <span class="fa fa-university"></span>
+        <span class="fas fa-university"></span>
          
         NTNU-ENG
       </a>
     </li>
     <li>
       <a href="https://moodle2.ntnu.edu.tw/">
-        <span class="fa fa-link"></span>
+        <span class="fas fa-link"></span>
          
         NTNU-Moodle
       </a>
@@ -369,7 +339,7 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -387,8 +357,8 @@ $(document).ready(function () {
 <div id="working-directory-setup" class="section level2">
 <h2>Working Directory Setup</h2>
 <p>It is highly recommended that you create a <code>Working_Directory</code> to save all the course materials. Under your working directory, you place the unzipped <code>demo_data</code> directory. Also under your <code>Working_Directory</code> are all the R script files you create or download.</p>
-<div id="htmlwidget-30260dbfdf58cb2a3f2f" style="width:672px;height:480px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-30260dbfdf58cb2a3f2f">{"x":{"diagram":"digraph {\n  \ngraph[layout = dot]\n\nnode[style=filled, color = grey90, penwidth = 0.3, fontcolor = grey30]\nedge[color= grey40, alpha = 0.2, penwidth= 0.4, arrowsize=0.8, arrowhead = normal]\n\na [label = \"Working_Directory\", shape = folder, fillcolor= \"#B0E2FC\"]\nb [label = \"demo_data\", shape = folder, fillcolor= \"#B0E2FC\"]\nc1 [label = \"r_script1.R\", shape=file, fillcolor= \"#96F597\"]\nc2 [label = \"r_script2.R\", shape=file, fillcolor= \"#96F597\"]\nc3 [label = \"...\", shape=file, fillcolor= \"#96F597\"]\nd1 [label = \"dataset1.csv\", shape = file, fillcolor=\"#96F597\"]\nd2 [label = \"dataset2.csv\", shape = file, fillcolor=\"#96F597\"]\nd3 [label = \"...\", shape = file, fillcolor=\"#96F597\"]\n\na -> {b, c1, c2, c3}\nb -> {d1,d2, d3}\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-56ed44a4b6c2c4baf21e" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-56ed44a4b6c2c4baf21e">{"x":{"diagram":"digraph {\n  \ngraph[layout = dot]\n\nnode[style=filled, color = grey90, penwidth = 0.3, fontcolor = grey30]\nedge[color= grey40, alpha = 0.2, penwidth= 0.4, arrowsize=0.8, arrowhead = normal]\n\na [label = \"Working_Directory\", shape = folder, fillcolor= \"#B0E2FC\"]\nb [label = \"demo_data\", shape = folder, fillcolor= \"#B0E2FC\"]\nc1 [label = \"r_script1.R\", shape=file, fillcolor= \"#96F597\"]\nc2 [label = \"r_script2.R\", shape=file, fillcolor= \"#96F597\"]\nc3 [label = \"...\", shape=file, fillcolor= \"#96F597\"]\nd1 [label = \"dataset1.csv\", shape = file, fillcolor=\"#96F597\"]\nd2 [label = \"dataset2.csv\", shape = file, fillcolor=\"#96F597\"]\nd3 [label = \"...\", shape = file, fillcolor=\"#96F597\"]\n\na -> {b, c1, c2, c3}\nb -> {d1,d2, d3}\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 <p>With the above file structure, if you want to access a particular file in the <code>demo_data</code> in your R script, you may access it using the following path:</p>
 <ul>
 <li>Absolute Path: <code>Path_to_Your_Working_Directory/demo_data/dataset1.csv</code></li>
@@ -417,7 +387,7 @@ $(document).ready(function () {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -435,7 +405,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
