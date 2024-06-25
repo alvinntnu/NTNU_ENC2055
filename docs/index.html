@@ -13,7 +13,7 @@
 
 <title>ENC2055: Introduction to Programming Languages For Linguistic Analysis</title>
 
-<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
@@ -34,8 +34,8 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155266163-1"></script>
 <script>
@@ -73,6 +73,7 @@ if (window.hljs) {
 
 
 
+
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -93,6 +94,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -150,11 +154,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -183,8 +191,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -192,16 +200,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -245,7 +246,7 @@ $(document).ready(function () {
 <div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -309,7 +310,7 @@ $(document).ready(function () {
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-external-link-alt"></span>
      
      
@@ -348,7 +349,7 @@ Languages For Linguistic Analysis</h1>
 
 
 <hr />
-<p>Last Updated on: 2023-02-22</p>
+<p>Last Updated on: 2024-06-25</p>
 <!-- ```{css, echo=FALSE} -->
 <!-- .bg-primary, .bg-success, .bg-warning, .bg-info, .bg-danger { -->
 <!--   #background-color: lightpink; -->
@@ -370,18 +371,22 @@ Annoucements</h1>
 <p>Important course information will be posted on this web page and
 announced in class. You are responsible for all material that appears
 here and should check this page for updates frequently.</p>
-<!-- - **2023-02-22**: The course materials will be updated on a weekly basis. Please note that not all the materials have been complete and make sure that you visit this website regularly to get the most up-to-date materials/information. -->
+<!-- - **2024-06-25**: The course materials will be updated on a weekly basis. Please note that not all the materials have been complete and make sure that you visit this website regularly to get the most up-to-date materials/information. -->
 <!-- - **2020-05-11**: Starting from May 15, we switch back to the physical classroom teaching. -->
 <!-- - **2020-04-11**: Due to the recent development of COVID-19, our class meeting will be conducted remotely via Google Hangout Meet conferencing starting from this week. We will switch back to the traditional classroom when the crisis is over. Please stay safe as always! Details are avaialble on our Moodle. -->
 <!-- - **2020-02-24**: Due to the outbreak of the coronavirus disease (COVID-19), the course schedule has been updated in response to the change of the semester start. -->
 <!-- - **2021-09-18**: Moodle page of this course is now available. For enrolled students, please visit Moodle regularly for recent updates. The first THREE weeks of the course will be conducted **online** (via Google Meet). Students who need authorization codes for course enrollment need to attend the meeting of the first week to get the code. (Authorization codes will be given after course orientation.) -->
 <ul>
-<li><strong>2023-02-22</strong>: All students must attend the first
+<li><strong>2024-06-25</strong>: The next time this course will be
+offered is in the fall of 2024.</li>
+<li><strong>2024-06-25</strong>: Attendance in the first week is
+mandatory for those who wish to take the course.</li>
+<li><strong>2024-06-25</strong>: All students must attend the first
 class meeting, especially those who need a course enrollment code.</li>
-<li><strong>2023-01-05</strong>: This course is open to the
-undergraduates. Please feel free to contact the instructor directly for
-course enrollment.</li>
-<li><strong>2023-01-05</strong>: For those who are considering taking
+<li><strong>2024-06-25</strong>: This course is open to the
+undergraduates, as well as non-English majors. Please feel free to
+contact the instructor directly for course enrollment.</li>
+<li><strong>2024-06-25</strong>: For those who are considering taking
 this course, please read the <a href="FAQ.html">FAQ</a> first before you
 make the decision. Thank you very much.</li>
 </ul>
@@ -453,7 +458,7 @@ Topic
 Week 1
 </td>
 <td style="text-align:left;">
-2023-02-24
+2024-09-06
 </td>
 <td style="text-align:left;">
 Data Science and R
@@ -464,7 +469,7 @@ Data Science and R
 Week 2
 </td>
 <td style="text-align:left;">
-2023-03-03
+2024-09-13
 </td>
 <td style="text-align:left;">
 R Fundamentals
@@ -475,7 +480,7 @@ R Fundamentals
 Week 3
 </td>
 <td style="text-align:left;">
-2023-03-10
+2024-09-20
 </td>
 <td style="text-align:left;">
 Code Format Convention, Subsetting
@@ -486,7 +491,7 @@ Code Format Convention, Subsetting
 Week 4
 </td>
 <td style="text-align:left;">
-2023-03-17
+2024-09-27
 </td>
 <td style="text-align:left;">
 Conditions and Loops
@@ -497,7 +502,7 @@ Conditions and Loops
 Week 5
 </td>
 <td style="text-align:left;">
-2023-03-24
+2024-10-04
 </td>
 <td style="text-align:left;">
 Functions
@@ -508,7 +513,7 @@ Functions
 Week 6
 </td>
 <td style="text-align:left;">
-2023-03-31
+2024-10-11
 </td>
 <td style="text-align:left;">
 Data Visualization
@@ -519,43 +524,43 @@ Data Visualization
 Week 7
 </td>
 <td style="text-align:left;">
-2023-04-07
+2024-10-18
 </td>
 <td style="text-align:left;">
 Data Manipulation
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;background-color: #FDEDEC !important;">
 Week 8
 </td>
-<td style="text-align:left;">
-2023-04-14
+<td style="text-align:left;font-weight: bold;background-color: #FDEDEC !important;">
+2024-10-25
 </td>
-<td style="text-align:left;">
-Data Manipulation
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;">
-Week 9
-</td>
-<td style="text-align:left;font-weight: bold;">
-2023-04-21
-</td>
-<td style="text-align:left;font-weight: bold;">
+<td style="text-align:left;font-weight: bold;background-color: #FDEDEC !important;">
 Midterm Exam
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Week 10
+Week 9
 </td>
 <td style="text-align:left;">
-2023-04-28
+2024-11-01
 </td>
 <td style="text-align:left;">
 String Manipulation
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;background-color: #FDEDEC !important;">
+Week 10
+</td>
+<td style="text-align:left;font-weight: bold;background-color: #FDEDEC !important;">
+2024-11-08
+</td>
+<td style="text-align:left;font-weight: bold;background-color: #FDEDEC !important;">
+University Sports Day (No Meeting)
 </td>
 </tr>
 <tr>
@@ -563,7 +568,7 @@ String Manipulation
 Week 11
 </td>
 <td style="text-align:left;">
-2023-05-05
+2024-11-15
 </td>
 <td style="text-align:left;">
 Regular Expressions
@@ -574,7 +579,7 @@ Regular Expressions
 Week 12
 </td>
 <td style="text-align:left;">
-2023-05-12
+2024-11-22
 </td>
 <td style="text-align:left;">
 Regular Expressions
@@ -585,7 +590,7 @@ Regular Expressions
 Week 13
 </td>
 <td style="text-align:left;">
-2023-05-19
+2024-11-29
 </td>
 <td style="text-align:left;">
 Data IO and Iteration
@@ -596,7 +601,7 @@ Data IO and Iteration
 Week 14
 </td>
 <td style="text-align:left;">
-2023-05-26
+2024-12-06
 </td>
 <td style="text-align:left;">
 Data IO and Iteration
@@ -607,20 +612,20 @@ Data IO and Iteration
 Week 15
 </td>
 <td style="text-align:left;">
-2023-06-02
+2024-12-13
 </td>
 <td style="text-align:left;">
 Data Analysis and Text Analytics: A Primer
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;">
+<td style="text-align:left;font-weight: bold;background-color: #FDEDEC !important;">
 Week 16
 </td>
-<td style="text-align:left;font-weight: bold;">
-2023-06-09
+<td style="text-align:left;font-weight: bold;background-color: #FDEDEC !important;">
+2024-12-20
 </td>
-<td style="text-align:left;font-weight: bold;">
+<td style="text-align:left;font-weight: bold;background-color: #FDEDEC !important;">
 Final Exam
 </td>
 </tr>
