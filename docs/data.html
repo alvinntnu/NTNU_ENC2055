@@ -13,7 +13,7 @@
 
 <title>Data</title>
 
-<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.31/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
@@ -32,12 +32,13 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<script src="site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="site_libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet" />
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <script src="site_libs/viz-1.8.2/viz.js"></script>
 <link href="site_libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
-<script src="site_libs/grViz-binding-1.0.10/grViz.js"></script>
-<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+<script src="site_libs/grViz-binding-1.0.11/grViz.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155266163-1"></script>
 <script>
@@ -372,8 +373,8 @@ files under a sub-directory, called <code>demo_data</code>. Also under
 your <code>Working_Directory</code> are all the R script files you have
 created or downloaded. This is the directory structure I use for the
 course materials.</p>
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-768787496cfc3c5aa59a" style="width:672px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-768787496cfc3c5aa59a">{"x":{"diagram":"digraph {\n  \ngraph[layout = dot]\n\nnode[style=filled, color = grey90, penwidth = 0.3, fontcolor = grey30]\nedge[color= grey40, alpha = 0.2, penwidth= 0.4, arrowsize=0.8, arrowhead = normal]\n\na [label = \"Working_Directory\", shape = folder, fillcolor= \"#B0E2FC\"]\nb [label = \"demo_data\", shape = folder, fillcolor= \"#B0E2FC\"]\nc1 [label = \"r_script1.R\", shape=file, fillcolor= \"#96F597\"]\nc2 [label = \"r_script2.R\", shape=file, fillcolor= \"#96F597\"]\nc3 [label = \"...\", shape=file, fillcolor= \"#96F597\"]\nd1 [label = \"dataset1.csv\", shape = file, fillcolor=\"#96F597\"]\nd2 [label = \"dataset2.csv\", shape = file, fillcolor=\"#96F597\"]\nd3 [label = \"...\", shape = file, fillcolor=\"#96F597\"]\n\na -> {b, c1, c2, c3}\nb -> {d1,d2, d3}\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-63a26056654d216dc673" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-63a26056654d216dc673">{"x":{"diagram":"digraph {\n  \ngraph[layout = dot]\n\nnode[style=filled, color = grey90, penwidth = 0.3, fontcolor = grey30]\nedge[color= grey40, alpha = 0.2, penwidth= 0.4, arrowsize=0.8, arrowhead = normal]\n\na [label = \"Working_Directory\", shape = folder, fillcolor= \"#B0E2FC\"]\nb [label = \"demo_data\", shape = folder, fillcolor= \"#B0E2FC\"]\nc1 [label = \"r_script1.R\", shape=file, fillcolor= \"#96F597\"]\nc2 [label = \"r_script2.R\", shape=file, fillcolor= \"#96F597\"]\nc3 [label = \"...\", shape=file, fillcolor= \"#96F597\"]\nd1 [label = \"dataset1.csv\", shape = file, fillcolor=\"#96F597\"]\nd2 [label = \"dataset2.csv\", shape = file, fillcolor=\"#96F597\"]\nd3 [label = \"...\", shape = file, fillcolor=\"#96F597\"]\n\na -> {b, c1, c2, c3}\nb -> {d1,d2, d3}\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 <p>With the above folder structure, if you want to access a particular
 file in the <code>demo_data</code> in your R script, you may access it
 using the following path:</p>
